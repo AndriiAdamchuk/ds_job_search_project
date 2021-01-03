@@ -10,5 +10,5 @@ import selenium_scrapping_script as sss
 import pandas as pd 
 path = "/Users/andrii/Documents/Git/ds_job_search_project/chromedriver"
 
-df = sss.get_jobs('data analyst', 10, False, path, 10)
+df = sss.get_jobs('data analyst', 1200, False, path, 15)
 df
