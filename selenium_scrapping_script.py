@@ -11,7 +11,7 @@ from selenium import webdriver
 import time
 import pandas as pd
 
-def get_jobs(position, num_jobs, verbose, path, slp_time):
+def get_jobs(num_jobs, verbose, path, slp_time):
     
     '''Gathers jobs as a dataframe, scraped from Glassdoor'''
     
@@ -23,10 +23,10 @@ def get_jobs(position, num_jobs, verbose, path, slp_time):
     
     #Change the path to where chromedriver is in your home folder.
     driver = webdriver.Chrome(executable_path=path, options=options)
-    driver.set_window_size(1120, 1000)
+    driver.set_window_size(1200, 1300)
 
-    url = "https://www.glassdoor.com/Job/jobs.htm?suggestCount=0&suggestChosen=false&clickSource=searchBtn&typedKeyword=&locT=&locId=&jobType=&context=Jobs&sc.keyword="+position+"&dropdown=0"   
-    #url = 'https://www.glassdoor.com/Job/jobs.htm?sc.keyword="' + position + '"&locT=C&locId=1147401&locKeyword=San%20Francisco,%20CA&jobType=all&fromAge=-1&minSalary=0&includeNoSalaryJobs=true&radius=100&cityId=-1&minRating=0.0&industryId=-1&sgocId=-1&seniorityType=all&companyId=-1&employerSizes=0&applicationType=0&remoteWorkType=0'
+    #url = "https://www.glassdoor.com/Job/jobs.htm?suggestCount=0&suggestChosen=false&clickSource=searchBtn&typedKeyword=data+analyst&sc.keyword="+position+"&locT=C&locId=2671300&jobType="   
+    url = 'https://www.glassdoor.com/Job/hemel-hempstead-data-analyst-jobs-SRCH_IL.0,15_IC2669775_KO16,28_IP4.htm'
     driver.get(url)
     jobs = []
 
