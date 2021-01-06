@@ -21,7 +21,6 @@ df = pd.concat([df1, df2, df3, df4])
 #job title seniority expertise (Junior, Senior etc.)
 
 
-#company age
 #tech stack per role parcing
 
 #remove nulls
@@ -43,8 +42,39 @@ df['company_name'] = df.apply(lambda x: x['Company Name'] if x['Rating'] <0 else
 df['city'] = df['Location'].apply(lambda x: x.split(',')[0])
 
 #company age
+df['company_age'] = df['Founded'].apply(lambda x: (2021 - x) if x >0 else x)
 
+#parcing tech stack per role
 
+#sql
+df['sql_yn'] = df['Job Description'].apply(lambda x: 1 if 'sql' in x.lower() else 0)
+
+#python
+df['python_yn'] = df['Job Description'].apply(lambda x: 1 if 'python' in x.lower() else 0)
+
+#r studio
+df['r_yn'] = df['Job Description'].apply(lambda x: 1 if ' r ' in x.lower() else 0)
+
+#spark
+df['spark_yn'] = df['Job Description'].apply(lambda x: 1 if 'spark' in x.lower() else 0)
+
+#aws
+df['aws_yn'] = df['Job Description'].apply(lambda x: 1 if 'aws' in x.lower() else 0)
+
+#excel
+df['excel_yn'] = df['Job Description'].apply(lambda x: 1 if 'excel' in x.lower() else 0)
+
+#tableau
+df['tableau_yn'] = df['Job Description'].apply(lambda x: 1 if 'tableau' in x.lower() else 0)
+
+#powerbi
+df['powerbi_yn'] = df['Job Description'].apply(lambda x: 1 if 'powerbi' in x.lower() else 0)
+
+#kafka
+df['kafka_yn'] = df['Job Description'].apply(lambda x: 1 if 'kafka' in x.lower() else 0)
+
+#snowflake
+df['snowflake_yn'] = df['Job Description'].apply(lambda x: 1 if 'snowflake' in x.lower() else 0)
 
 
 
