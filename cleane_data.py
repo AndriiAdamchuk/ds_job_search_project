@@ -16,9 +16,8 @@ df4 = pd.read_csv('df_glasdoor_4.csv')
 df = pd.concat([df1, df2, df3, df4])
 
 
-
-#job title domain expertise (Product, Finance etc.)
-#job title seniority expertise (Junior, Senior etc.)
+#job title cleaning (Data Analyst, BI Analyst, etc.)
+#job title seniority expertise (Junior, Senior, etc.)
 
 
 #tech stack per role parcing
@@ -27,6 +26,22 @@ df = pd.concat([df1, df2, df3, df4])
 df = df.drop_duplicates()
 df = df[df['Salary Estimate']!= '-1']
 df = df.drop(['Unnamed: 0'], axis = 1)
+
+#job title cleaning (Data Analyst, BI Analyst, etc.)
+def clean_title(title):
+    if 'bi analyst' in title.lower():
+        return 'bi analyst'
+    elif 'business analyst ' in title.lower(): 
+        return 'business analyst'
+    elif 'data analyst' or 'data insights analyst' in title.lower():
+        return 'data analyst'
+    else:
+        return 'na'
+    
+df['job_title_short'] = df['Job Title'].apply(clean_title)
+
+#job title domain expertise (Product, Finance etc.)
+df['expertise'] = df['Job Title'].apply(lambda x: x.split('Data')[0])
 
 
 #salary parcing
@@ -77,9 +92,5 @@ df['kafka_yn'] = df['Job Description'].apply(lambda x: 1 if 'kafka' in x.lower()
 
 #snowflake
 df['snowflake_yn'] = df['Job Description'].apply(lambda x: 1 if 'snowflake' in x.lower() else 0)
-
-
-#job title domain expertise (Product, Finance etc.)
-df['expertise'] = df['Job Title'].apply(lambda x: x.split('Data')[0])
 
 df.to_csv("df_final.csv", index = False)
