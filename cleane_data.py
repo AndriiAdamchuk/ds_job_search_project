@@ -16,32 +16,62 @@ df4 = pd.read_csv('df_glasdoor_4.csv')
 df = pd.concat([df1, df2, df3, df4])
 
 
-#job title cleaning (Data Analyst, BI Analyst, etc.)
-#job title seniority expertise (Junior, Senior, etc.)
-
-
-#tech stack per role parcing
-
 #remove nulls, duplicates, and Unnamed column
 df = df.drop_duplicates()
 df = df[df['Salary Estimate']!= '-1']
 df = df.drop(['Unnamed: 0'], axis = 1)
 
+
 #job title cleaning (Data Analyst, BI Analyst, etc.)
 def clean_title(title):
-    if 'bi analyst' in title.lower():
-        return 'bi analyst'
-    elif 'business analyst ' in title.lower(): 
+    if 'business analyst ' in title.lower(): 
         return 'business analyst'
-    elif 'data analyst' or 'data insights analyst' in title.lower():
+    elif 'data analyst' in title.lower() or 'data insights analyst' in title.lower():
         return 'data analyst'
     else:
         return 'na'
     
 df['job_title_short'] = df['Job Title'].apply(clean_title)
 
+
+#job title seniority expertise (Junior, Senior, etc.)
+def title_seniority(title):
+    if 'junior' in title.lower() or 'jr' in title.lower() or 'jr.' in title.lower():
+        return 'junior'
+    elif 'senior' in title.lower() or 'sr' in title.lower() or 'sr.' in title.lower():
+        return 'senior'
+    elif 'manager' in title.lower():
+        return 'manager'
+    elif 'lead' in title.lower():
+        return 'lead'
+    else:
+        return 'na'
+
+df['seniority'] = df['Job Title'].apply(title_seniority)
+
+
 #job title domain expertise (Product, Finance etc.)
-df['expertise'] = df['Job Title'].apply(lambda x: x.split('Data')[0])
+def expertize(title):
+    if 'people' in title.lower() or 'hr' in title.lower():
+        return 'hr'
+    elif 'marketing' in title.lower() or 'user acquisition' in title.lower():
+        return 'marketing'
+    elif 'finance' in title.lower() or 'fintech' in title.lower():
+        return 'finance'
+    elif 'crm' in title.lower():
+        return 'crm'
+    elif 'product' in title.lower():
+        return 'product'
+    elif 'project' in title.lower():
+        return 'project'
+    elif 'retail' in title.lower():
+        return 'retail'
+    elif 'sales' in title.lower():
+        return 'sales'
+    else:
+        return 'other'
+
+df['business_domain'] = df['Job Title'].apply(expertize)
 
 
 #salary parcing
@@ -51,15 +81,19 @@ replace_p_k = salary.apply(lambda x: x.replace('£', '').replace('K', ''))
 df['min_salary'] = replace_p_k.apply(lambda x: int(x.split(' ')[0])) 
 df['max_salary'] = replace_p_k.apply(lambda x: int(x.split(' ')[-2]))
 df['avg_salary'] = (df.min_salary+df.max_salary)/2       
-                         
+   
+                      
 #company name text only
 df['company_name'] = df.apply(lambda x: x['Company Name'] if x['Rating'] <0 else x['Company Name'][:-3], axis = 1)
+
 
 #city
 df['city'] = df['Location'].apply(lambda x: x.split(',')[0])
 
+
 #company age
 df['company_age'] = df['Founded'].apply(lambda x: (2021 - x) if x >0 else x)
+
 
 #parcing tech stack per role
 
