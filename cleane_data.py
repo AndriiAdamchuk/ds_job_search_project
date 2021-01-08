@@ -23,8 +23,10 @@ df = pd.concat([df1, df2, df3, df4])
 
 #tech stack per role parcing
 
-#remove nulls
+#remove nulls, duplicates, and Unnamed column
+df = df.drop_duplicates()
 df = df[df['Salary Estimate']!= '-1']
+df = df.drop(['Unnamed: 0'], axis = 1)
 
 
 #salary parcing
@@ -77,9 +79,7 @@ df['kafka_yn'] = df['Job Description'].apply(lambda x: 1 if 'kafka' in x.lower()
 df['snowflake_yn'] = df['Job Description'].apply(lambda x: 1 if 'snowflake' in x.lower() else 0)
 
 
+#job title domain expertise (Product, Finance etc.)
+df['expertise'] = df['Job Title'].apply(lambda x: x.split('Data')[0])
 
-
-
-
-
-
+df.to_csv("df_final.csv", index = False)
