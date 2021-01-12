@@ -54,15 +54,33 @@ Cleaned the data to use for my model. The following changes have been made:
 
 ## Exploratory Data Analysis
 
+I checked the data distribution, correlation between features, counts categorical variables. Some graphs below. 
+
 ![](images/ds_salary_eda_barplot.png)
 ![](images/ds_salary_eda_clustermap.png)
 ![](images/ds_salary_eda_pivot.png)
 
 
+## Model Building
+
+- Transformed categorical variables into dummy variables. 
+- Split data into train and test sets. Train set (20%).
+- Used Mean Absolute Error to evaluate models. MAE was used because because outliers are not bad for this type of model.
+- Tried 2 models:
+  - Multiple Linear Regression - baseline for the model
+  - Random Forest - as my data has a lot of sparcity I decided to try RF
+
+## Model Performance
+
+The Random Forest performed better then Multiple Linear Regression
+
+- Random Forest: MAE = 6.06
+- Multiple Linear Regression: MAE = 9.18
 
 
+## Production
 
-
+Built flask API endpoint hosted on the local webserver.
 
 
 
