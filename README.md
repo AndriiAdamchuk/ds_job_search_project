@@ -54,6 +54,9 @@ Cleaned the data to use for my model. The following changes have been made:
 
 ## Exploratory Data Analysis
 
+![](images/ds_salary_eda_barplot.png)
+![](images/ds_salary_eda_clustermap.png)
+![](images/ds_salary_eda_pivot.png)
 
 
 
