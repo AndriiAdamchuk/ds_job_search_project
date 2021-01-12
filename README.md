@@ -8,10 +8,11 @@
 
 ## Code and Resources
 
-- Python Version 3.7
-- Packages: pandas, numpy, matplotlib, seaborn, selenium, sklearn, flask, json, pickle
-- Scraper Article: https://towardsdatascience.com/selenium-tutorial-scraping-glassdoor-com-in-10-minutes-3d0915c6d905
-- Flask Productionization Article: https://towardsdatascience.com/productionize-a-machine-learning-model-with-flask-and-heroku-8201260503d2
+- __Python Version__ 3.7
+- __Packages__: pandas, numpy, matplotlib, seaborn, selenium, sklearn, flask, json, pickle
+- __Scraper Article__: https://towardsdatascience.com/selenium-tutorial-scraping-glassdoor-com-in-10-minutes-3d0915c6d905
+- __Flask Productionization Article__: https://towardsdatascience.com/productionize-a-machine-learning-model-with-flask-and-heroku-8201260503d2
+- __Markdown Cheatsheet__: https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet
 
 
 ## Web Scraping
@@ -54,12 +55,33 @@ Cleaned the data to use for my model. The following changes have been made:
 
 ## Exploratory Data Analysis
 
+I checked the data distribution, correlation between features, counts categorical variables. Some graphs below. 
+
+![](images/ds_salary_eda_barplot.png)
+![](images/ds_salary_eda_clustermap.png)
+![](images/ds_salary_eda_pivot.png)
 
 
+## Model Building
+
+- Transformed categorical variables into dummy variables. 
+- Split data into train and test sets. Train set (20%).
+- Used Mean Absolute Error to evaluate models. MAE was used because because outliers are not bad for this type of model.
+- Tried 2 models:
+  - __Multiple Linear Regression__ - baseline for the model
+  - __Random Forest__ - as my data has a lot of sparcity I decided to try RF
+
+## Model Performance
+
+The Random Forest performed better then Multiple Linear Regression
+
+- __Random Forest__: MAE = 6.06
+- __Multiple Linear Regression__: MAE = 9.18
 
 
+## Production
 
-
+Built flask API endpoint hosted on the local webserver.
 
 
 
