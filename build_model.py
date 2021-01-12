@@ -82,6 +82,7 @@ tpred_rf = gs.best_estimator_.predict(X_test)
 from sklearn.metrics import mean_absolute_error
 mean_absolute_error(y_test,tpred_lm)
 mean_absolute_error(y_test,tpred_rf)
+mean_absolute_error(y_test,(tpred_rf+tpred_lm)/2)
 
 import pickle
 pickl = {'model': gs.best_estimator_}
