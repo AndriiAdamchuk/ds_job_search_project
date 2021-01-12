@@ -29,4 +29,44 @@ Adjusted the web scraper code to collect the following information about 360 job
   - Sector
   - Revenue
   
-  
+## Data Cleaning
+
+Cleaned the data to use for my model. The following changes have been made:
+
+ - Removed rows without salary, duplicates, and Unnamed column
+ - Cleaned job title (Data Analyst, BI Analyst, etc.)
+ - Parced job title seniority expertise (Junior, Senior, etc.)
+ - Parced job title domain expertise (Product, Finance etc.)
+ - Parced min, max, avg salary
+ - Created columns for different skills listed in job description:
+   - sql
+   - python
+   - r studio
+   - spark
+   - aws
+   - excel
+   - powerbi
+   - tableau
+   - kafka
+   - snowflake
+- Column for description length
+
+
+## Exploratory Data Analysis
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
